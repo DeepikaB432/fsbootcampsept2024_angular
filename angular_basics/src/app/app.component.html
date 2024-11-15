@@ -1,0 +1,49 @@
+<h1>This is the example of interpolation. We simply use curly brackets to display the value from a variable {{title}}</h1>
+<h3>My name is {{name}} </h3>
+<h4>This is an example of interpolation to access the values from an object along with string to show concatenation(combining string with variable)</h4>
+{{ 'ID =' + person.id + ' Name = ' + person.name + ' Age = ' + person.age }}
+ 
+<app-home></app-home>
+ 
+<ul>
+  <li *ngFor="let person of persons">{{person.id}}. {{person.name}} is {{person.age}} year old</li>
+</ul>
+ 
+<ul>
+  <li *ngFor="let person of persons">{{ person.id + ' ' + person.name + ' is ' + person.age + ' year old'}}</li>
+</ul>
+
+<h2>two ways od displaying values from a variable in angular</h2>
+
+<div>
+  <h3 style="color: {{color_red}}; background-color: {{background_color}}">This is an example of interpolation.Basically you try to display value from .ts file ny using the variable name inside curly brackets</h3><br>
+  Title <input type="text" value="{{title}}">
+  <button (click)="userSaved()">Submit</button>
+
+</div>
+
+<div>
+  <h3 [style.color]="color_red" [style.background-color]="background_color">This is an example of data binding</h3><br>
+  Title <input type="text" [value]="title">
+  <button [disabled]="isDisabled">Submit</button>
+</div>
+ 
+<div>
+  <h2 [ngClass]="bg_color_class">Adding Image using interpolation</h2>
+  <img style="height: 100px;" src="{{imageurl}}" alt="Image not found">
+</div>
+
+<div>
+  <h2 class="bg_color">Adding Image using data binding</h2>
+  <img style="height: 100px;" [src]="imageurl" alt="Image not found">
+</div>
+
+<div>
+  <h3>NgModel Example using property binding</h3>
+  <input type="text" [ngModel]="title">
+</div>
+
+<div>
+  <h3>NgModel Example using two way binding</h3>
+  <input type="text" [(ngModel)]="title">
+</div>
