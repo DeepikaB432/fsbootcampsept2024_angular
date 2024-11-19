@@ -1,1 +1,8 @@
 <h2>This is the text from home component</h2>
+
+<ul>
+    <li *ngFor="let student of students">{{student.id}}. {{student.name}} is {{student.age}} year old</li>
+  </ul>
+
+<app-students></app-students>
+<h2>Home component ends here</h2>

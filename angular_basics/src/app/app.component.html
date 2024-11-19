@@ -6,6 +6,7 @@
 <app-home></app-home>
  
 <ul>
+  <div *ngIf="persons.length >0">This content is still visible</div>
   <li *ngFor="let person of persons">{{person.id}}. {{person.name}} is {{person.age}} year old</li>
 </ul>
  

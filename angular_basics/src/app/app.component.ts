@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
- import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component';
+import { Person } from './person';
+import { DataService } from './data.service';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,8 +14,17 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+
+  constructor(){
+    console.log('Constructor is called')
+    this.persons = this.personService.getPersons();
+    console.log(this.persons);
+  }
+
+  persons:Person[] = [];
+  personService: DataService = inject(DataService);
  
-  title = 'Angular Basics';
+  title:string = 'Angular Basics';
  
   isDisabled:boolean =true ;
   color_red:string ="red";
@@ -27,14 +39,6 @@ export class AppComponent {
   imageurl = "https://cdn.pixabay.com/photo/2022/12/09/00/47/autumn-7644257_1280.jpg";
  
   person = { id: 1, name: "Harsh", age: 28 }
- 
-  persons = [
-    { id: 1, name: "Harsh", age: 28 },
-    { id: 2, name: "Harry", age: 20 },
-    { id: 3, name: "Sam", age: 30 },
-    { id: 4, name: "Roger", age: 35 },
-    { id: 5, name: "George", age: 29 },
-  ]
 
   userSaved(){
     console.log('user is saved')
