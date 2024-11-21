@@ -4,15 +4,18 @@
         <div class="mb-3">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" [(ngModel)]="empDetails.email" pattern=".*@[a-zA-Z0-9.-]*" required #emailVal ="ngModel">
-            <div *ngIf="emailVal.touched && emailVal.invalid && !emailVal.errors">Please provide a email</div>
-            <!-- <div *ngIf="emailVal.touched && emailVal.errors">Email is invalid</div> -->
+            <div *ngIf="emailVal.touched && emailVal.errors">
+                <div class="text-danger" *ngIf="emailVal.errors['required']">Please provide a email</div>
+                <div class="text-danger" *ngIf="emailVal.errors['pattern']">Email is invalid</div>
+             </div>
         </div>
         <div class="mb-3">
             <label for="first_name">First Name</label>
             <input class="form-control" type="first_name" name="first_name" minlength="3" [(ngModel)]="empDetails.first_name" required #firstNameVal ="ngModel">
-            <div *ngIf="firstNameVal.touched && firstNameVal.invalid">
-                Please provide a first name
-            </div>
+            <div *ngIf="firstNameVal.touched && firstNameVal.errors">
+                <div class="text-danger" *ngIf="firstNameVal.errors['required']">Please provide a First Name</div>
+                <div class="text-danger" *ngIf="firstNameVal.errors['minlength']">Please provide a valid First Name</div>
+             </div>
         </div>
         <div class="mb-3">
             <label for="last_name">Last Name</label>
@@ -25,9 +28,7 @@
         <div class="mb-3">
             <label for="department">Department</label>
             <input class="form-control" type="department" name="department" [(ngModel)]="empDetails.department" required #departmentVal ="ngModel">
-            <div *ngIf="departmentVal.touched && departmentVal.invalid">
-                Please provide a department
-            </div>
+            <div class="text-danger" *ngIf="departmentVal.touched && departmentVal.invalid">Please enter a Department</div>
         </div>
 
         <button type="submit" class="btn btn-primary">Add Employee</button>
