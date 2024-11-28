@@ -12,6 +12,7 @@
             <input class="form-control" type="password" name="password" formControlName="password">
             <div class="text-danger" *ngIf="employeeForm.get('password')?.touched && employeeForm.get('password')?.errors?.['required']">Password is required</div>
             <div class="text-danger" *ngIf="employeeForm.get('password')?.touched && employeeForm.get('password')?.errors?.['minlength']">Password should be minimum 6 letters</div>
+            <div class="text-danger" *ngIf="employeeForm.get('password')?.touched && employeeForm.get('password')?.errors?.['weakPassword']">Please provide a strong password</div>
         </div>
         <div class="mb-3">
             <label for="first_name">First Name</label>
