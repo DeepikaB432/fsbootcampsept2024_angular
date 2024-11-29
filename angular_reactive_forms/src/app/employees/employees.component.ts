@@ -14,16 +14,31 @@ export class EmployeesComponent {
 
   router = inject(ActivatedRoute);
 
+  details: string = '';
+
   employees = [
-    {id:1, name:'Deepika'},
-    {id:2, name:'Sam'},
-    {id:3, name:'George'}
+    {id:1, name:'Deepika',description: 'Deepika is a Developer'},
+    {id:2, name:'Sam',description:'Sam is a manager'},
+    {id:3, name:'George',description: 'George is the HR'}
   ]
 
   constructor(){
     this.router.paramMap.subscribe((param)=>{
       const emp_id = param.get('id')
-      console.log(emp_id)
+      if(emp_id){
+        const employee = this.employees.find(e => {
+          if(e.id == parseInt(emp_id)){
+            return e;
+          }else{
+            return null;
+          }
+        })
+        if(employee){
+          this.details = employee.description;
+        }else{
+          this.details = '';
+        }
+      }
     });
   }
 }
