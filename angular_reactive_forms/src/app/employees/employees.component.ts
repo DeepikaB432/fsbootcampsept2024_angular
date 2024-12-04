@@ -2,6 +2,8 @@ import { Component,inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { EmployeeService } from '../employee.service';
+import { Employee } from '../employee';
 
 @Component({
   selector: 'app-employees',
@@ -13,32 +15,59 @@ import { RouterModule } from '@angular/router';
 export class EmployeesComponent {
 
   router = inject(ActivatedRoute);
+  emp_data:EmployeeService = inject(EmployeeService)
 
-  details: string = '';
-
-  employees = [
-    {id:1, name:'Deepika',description: 'Deepika is a Developer'},
-    {id:2, name:'Sam',description:'Sam is a manager'},
-    {id:3, name:'George',description: 'George is the HR'}
-  ]
+  employees:any;
 
   constructor(){
+
+  }
+
+  ngOnInit(){
+
+    this.getAllEmployees();
+
     this.router.paramMap.subscribe((param)=>{
-      const emp_id = param.get('id')
+      const emp_id = param.get('id');
       if(emp_id){
-        const employee = this.employees.find(e => {
-          if(e.id == parseInt(emp_id)){
-            return e;
-          }else{
-            return null;
-          }
-        })
-        if(employee){
-          this.details = employee.description;
-        }else{
-          this.details = '';
-        }
+        //running the request to get an employee based on its id
+        this.getEmployeeByID(parseInt(emp_id));
       }
     });
+  }
+
+  getAllEmployees(){
+    // to get all the employees
+    this.emp_data.getEmployees().subscribe((val)=>{
+      this.employees = val;
+    });
+  }
+
+  getEmployeeByID(id:number){
+    this.emp_data.getEmployeesById(id).subscribe((result:any)=>{
+      //assign that particular employee if it exist
+      if(result.length>0){
+        console.log(result)
+        // this.employees = result;
+      }
+    })
+  }
+
+  updateEmployee(id:number){
+    if(id){
+      console.log('id', id)
+      this.getEmployeeByID(id);
+    }
+  }
+
+  delEmployee(id:number){
+    if(id){
+      this.emp_data.deleteEmployee(id).subscribe((result:any)=>{
+        if(result.status == 'success'){
+          this.getAllEmployees();
+        }
+      })
+    }
+
   }
 }

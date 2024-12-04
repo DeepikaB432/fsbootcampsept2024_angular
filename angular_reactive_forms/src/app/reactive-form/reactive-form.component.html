@@ -4,6 +4,7 @@
         <div class="mb-3">
             <label for="email">Email</label>
             <input class="form-control" type="email" name="email" formControlName="email">
+            <input class="form-control" type="hidden" name="employee_id" formControlName="email">
             <div class="text-danger" *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.errors?.['required']">Email is required</div>
             <div class="text-danger" *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.errors?.['email']">Email is Invalid</div>
         </div>
@@ -33,5 +34,6 @@
             <div class="text-danger" *ngIf="employeeForm.get('department')?.touched && employeeForm.get('department')?.errors?.['required']">Department is required</div>
         </div>
         <button class="btn btn-primary" (click)="addEmployee()">Add Employee</button>
+        <button class="btn btn-primary">Update Employee</button>
     </form>
 </div>>

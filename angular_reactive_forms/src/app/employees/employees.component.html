@@ -1,8 +1,36 @@
 <div class="container">
-    <ul>
+    <!-- <ul *ngIf="employees">
         <li *ngFor = "let emp of employees">
-            <a [routerLink]="['/employees',emp.id]">{{emp.name}}</a>
+            <a [routerLink]="['/employees',emp.employee_id]">{{emp.first_name
+            }}</a>
         </li>
-    </ul>
-    <p>{{details}}</p>
-</div>>
+    </ul> -->
+    <!-- <p>{{details}}</p> -->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = "let emp of employees">
+            <th scope="row">{{emp.employee_id}}</th>
+            <td>{{emp.email}}</td>
+            <td>{{emp.first_name}}</td>
+            <td>{{emp.last_name}}</td>
+            <td>{{emp.salary}}</td>
+            <td>
+                <a [routerLink]="['/add_employee',emp.employee_id]">
+                    <button class="btn btn-warning">Edit</button>
+                </a>
+                <button class="btn btn-danger m-1" (click)="delEmployee(emp.employee_id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
