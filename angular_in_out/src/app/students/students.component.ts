@@ -1,4 +1,4 @@
-import { Component,EventEmitter,Input, Output } from '@angular/core';
+import { Component,EventEmitter,Input, Output, SimpleChanges } from '@angular/core';
 import { Student } from '../student';
 
 @Component({
@@ -17,5 +17,19 @@ export class StudentsComponent {
   addVal(val:string){
     console.log(val)
     this.event_to_send.emit(val);
+  }
+
+  constructor(){
+    console.log('Constructor is Called');
+  }
+
+  ngOnInit(){
+    console.log('ngOnInit is called');
+    this.title_from_parent = "Title is Updated";
+    console.log('After', this.title_from_parent)
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    console.log('ngOnChanges is called', changes)
   }
 }
